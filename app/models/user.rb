@@ -8,4 +8,11 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  # Defines a proto-feed.
+# See "Following users" for the full implementation.
+def feed
+  Micropost.where("user_id = ?", id)
+end
+
 end
